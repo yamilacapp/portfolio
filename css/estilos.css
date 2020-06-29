@@ -1,0 +1,87 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    background-color:#eeeeee;
+}
+
+nav{
+    width: max-content;
+    margin: auto;
+}
+
+nav li{
+  width: 150px;;
+}
+
+nav li:hover{
+  text-decoration: underline;
+}
+
+nav .nav-link {
+  color: #4b4b4b !important; 
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+#contacto h1{
+  font-weight: bold;
+}
+
+#contacto input, #contacto textarea{
+  border: none;
+  border-bottom: 1px solid grey;
+  background-color: #eeeeee;
+  border-radius: 0;
+}
+
+#contacto .submit{
+  text-align: center;
+}
+
+#contacto .submit button{
+  background-color: black;
+  color: white;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+footer{
+  background-color: white;
+}
+
+.redes {
+  text-align: center;
+  
+}
+
+.redes i{
+  margin-right: 10px;
+  font-size: 30px;
+  border: 1px solid black;
+  border-radius: 100%;
+  padding: 8px;
+}
+
+#proyectos .proyecto{
+  background-color: white;
+}
+
+#proyectos .btn{
+  border-radius: 0;
+  background-color: black;
+}
+
+#proyectos ul{
+  list-style: none;
+}
+
+#proyectos ul li{
+  margin-left: -40px;
+}
+
+#sobre-mi i{
+  font-size: 50px;
+  color: white;
+  background-color: black;
+  padding: 20px;
+}
