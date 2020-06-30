@@ -85,3 +85,24 @@ footer{
   background-color: black;
   padding: 20px;
 }
+
+
+.foto{
+  border-radius: 50%;
+  box-shadow: inset 5px 5px 10px 0px rgba(209, 209, 209, 0.63);
+  overflow: hidden;
+}
+
+.active{
+  font-weight: 800 !important;
+  text-decoration: underline;
+}
+
+.boton {
+  border-radius: 0 !important;
+  background: black;
+}
+
+#sobre-mi h1, #proyectos h1{
+  font-weight: 700;
+}
