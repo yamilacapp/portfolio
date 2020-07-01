@@ -9,7 +9,7 @@ nav{
 }
 
 nav li{
-  width: 150px;;
+  width: 250px;;
 }
 
 nav li:hover{
@@ -22,9 +22,6 @@ nav .nav-link {
   font-weight: 600;
 }
 
-#contacto h1{
-  font-weight: bold;
-}
 
 #contacto input, #contacto textarea{
   border: none;
@@ -55,18 +52,15 @@ footer{
 }
 
 .redes i{
-  margin-right: 10px;
+  margin-right: 25px;
   font-size: 30px;
   border: 1px solid black;
   border-radius: 100%;
   padding: 8px;
 }
 
-#proyectos .proyecto{
-  background-color: white;
-}
 
-#proyectos .btn{
+#proyectos .btn, #bienvenida .btn{
   border-radius: 0;
   background-color: black;
 }
@@ -84,13 +78,11 @@ footer{
   color: white;
   background-color: black;
   padding: 20px;
+
 }
-
-
-.foto{
-  border-radius: 50%;
-  box-shadow: inset 5px 5px 10px 0px rgba(209, 209, 209, 0.63);
-  overflow: hidden;
+ 
+#sobre-mi h4{
+line-height: 2;
 }
 
 .active{
@@ -98,11 +90,38 @@ footer{
   text-decoration: underline;
 }
 
-.boton {
+#sobre-mi .btn {
   border-radius: 0 !important;
   background: black;
 }
 
-#sobre-mi h1, #proyectos h1{
-  font-weight: 700;
+#sobre-mi h1, #proyectos h1, #contacto h1, #bienvenida h1 {
+  font-weight: 800;
+  font-size: 60px;
+}
+
+footer a{
+  color: black;
+  text-decoration: underline;
+}
+
+
+#inicio {
+  background-image: url("../img/fondo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+#bienvenida a{
+  color:white;
+
+}
+
+#bienvenida a:hover{
+  text-decoration: none;
+}
+
+.curso{
+  border-bottom: 1px solid gray;
 }
