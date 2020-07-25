@@ -1,3 +1,4 @@
+<?php $pg="sobre-mi"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,31 +20,9 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark ">
-            <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse"
-                data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="index.html">Inicio<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="sobre-mi.html">Sobre mi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="proyectos.html" tabindex="-1" aria-disabled="true">Proyectos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contacto.html" tabindex="-1" aria-disabled="true">Contacto</a>
-                    </li>
-
-                </ul>
-            </div>
-        </nav>
+        <?php
+            include_once("menu.php");
+            ?>
     </header>
     <section id="sobre-mi">
         <div class="container">
@@ -245,30 +224,10 @@
 
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-4 py-5">
-                    <p class="text-left"><a href="index.html"><strong><u> ©Todos los derechos reservados <br>
-                                    2020</u></strong></a></p>
+   <?php
+    include_once("footer.php");
+   ?>
 
-
-                </div>
-                <div class="col-12 col-md-4 py-5 redes">
-                    <a href=https://wa.link/pv46yv""> <i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.linkedin.com/in/yamila-cappari-2906a156/"> <i
-                            class="fab fa-linkedin-in"></i></a>
-
-                    <a href="https://www.instagram.com/yc_webdesigner/"><i class="fab fa-instagram"></i></a>
-
-                </div>
-                <div class="col-12 col-md-4 py-5">
-                    <p class="text-right">Patrocinado por <strong><br><a
-                                href="https://depcsuite.com/?v=d72a48a8ebd2">DePcSuite</a></strong></p>
-                </div>
-            </div>
-        </div>
-    </footer>
     </div>
     </div>
 

@@ -1,3 +1,80 @@
+
+<?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include_once ("PHPMailer/PHPMailer/src/SMTP.php");
+include_once ("PHPMailer/PHPMailer/src/PHPMailer.php");
+
+$pg="contacto"; 
+
+$msg = "";
+
+function guardarCorreo($correo)
+{
+    $archivo = fopen("mails.txt", "a+");
+    fwrite($archivo, $correo . ";\n\r");
+    fclose($archivo);
+}
+
+if ($_POST) { /* es postback */
+
+    $nombre = $_POST["txtNombre"];
+    $correo = $_POST["txtCorreo"];
+    $asunto = $_POST["txtAsunto"];
+    $mensaje = $_POST["txtMensaje"];
+
+    if ($nombre != "" && $correo != "") {
+        guardarCorreo($correo);
+
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPAuth = true;
+        $mail->Host = "mail.nelsontarche.com.ar"; // SMTP a utilizar. Por ej. mail.dominio.com.ar
+        $mail->Username = "info@nelsontarche.com.ar"; // Correo completo a utilizar
+        $mail->Password = "aqui va la clave de tu correo";
+        $mail->Port = 25;
+        $mail->From = "info@nelsontarche.com.ar"; // Desde donde enviamos (Para mostrar)
+        $mail->FromName = "Nelson Daniel Tarche";
+        $mail->IsHTML(true);
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ),
+        );
+
+        //Destinatario
+        $mail->addAddress($correo);
+        //$mail->addBCC("nelson.tarche@gmail.com");
+        $mail->Subject = "Contacto página web";
+        $mail->Body = "Recibimos tu consulta, <br>te responderemos a la brevedad.";
+        //  if(!$mail->Send()){
+        //     $msg = "Error al enviar el correo, intente nuevamente mas tarde.";
+        //   }
+        $mail->ClearAllRecipients(); //Borra los destinatarios
+
+        //Nosotros
+        $mail->addAddress("nelson.tarche@gmail.com");
+        $mail->Subject = "Recibiste un mensaje desde tu página web";
+        $mail->Body = "Te escribió $nombre cuyo correo es $correo, con el asunto $asunto y el siguiente mensaje:<br><br>$mensaje";
+
+        if ($mail->Send()) {
+           //if(1==1){
+            header('Location: confirmacion-envio.php');
+        } else {
+            $msg = "Error al enviar el correo, intente nuevamente mas tarde.";
+        }
+    } else {
+        $msg = "Complete todos los campos";
+    }
+
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,33 +97,21 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark ">
-            <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="index.html">Inicio<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="sobre-mi.html">Sobre mi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="proyectos.html" tabindex="-1" aria-disabled="true">Proyectos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="contacto.html" tabindex="-1" aria-disabled="true">Contacto</a>
-                    </li>
-
-                </ul>
-
-            </div>
-        </nav>
+        <?php
+            include_once("menu.php");
+            ?>
     </header>
     <div class="container">
+    <?php if (isset($msg) && $msg != ""): ?>
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-danger" role="alert">
+            <?php echo $msg; ?>
+            </div>
+        </div>
+    </div>
+    <?php endif;?>
+
         <div class="row">
             <div class="col-12">
                 <section id="contacto">
@@ -73,24 +138,24 @@
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="my-2 ">
-                                                        <input type="text" placeholder="Nombre" class="form-control">
+                                                        <input type="text" placeholder="Nombre" name="txtNombre" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="my-2 ">
-                                                        <input type="email" placeholder="Correo" class="form-control">
+                                                        <input type="email" placeholder="Correo" name="txtCorreo" class="form-control">
                                                     </div>
                                                 </div>
 
                                             </div>
                                             <div class="row">
                                                 <div class="my-2 col-12">
-                                                    <input type="text" placeholder="Asunto" class="form-control">
+                                                    <input type="text" placeholder="Asunto"   name="txtAsunto" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="my-2 col-12">
-                                                    <textarea name="" id="" class="form-control"
+                                                    <textarea id="" class="form-control" name="txtMensaje"
                                                         placeholder="Mensaje"></textarea>
                                                 </div>
                                             </div>
@@ -105,27 +170,10 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div class="container">
-            <div class="row mt-5">
-                <div class="col-12 col-md-4 py-5">
-                <p class="text-left"><a href="index.html"><strong><u> ©Todos los derechos reservados <br> 2020</u></strong></a></p>
+    <?php
+    include_once("footer.php");
+   ?>
 
-                </div>
-                <div class="col-12 col-md-4 py-5 redes">
-                    <a href=https://wa.link/pv46yv""> <i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.linkedin.com/in/yamila-cappari-2906a156/"> <i class="fab fa-linkedin-in"></i></a>
-                    
-                    <a href="https://www.instagram.com/yc_webdesigner/"><i class="fab fa-instagram"></i></a>
-
-                </div>
-                <div class="col-12 col-md-4 py-5">
-                <p class="text-right">Patrocinado por <strong><br><a href="https://depcsuite.com/?v=d72a48a8ebd2">DePcSuite</a></strong>
-                </p>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     </div>
     </div>
